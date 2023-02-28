@@ -1,6 +1,28 @@
 #include<iostream>
 using namespace std;
 
+int binarysearch(int key, int arr[], int n){
+      int s=0;
+      int e=n-1;
+     
+
+      while(s<=e){
+
+         int mid=(s+e)/2;
+        if(arr[mid]==key){
+           return mid;
+        }
+        else if(arr[mid]>key){ 
+            e=mid-1;
+
+        }
+        else{
+            s=mid+1;
+        }
+      }
+return -1;
+}
+
 
 int main(){
 //Linear
@@ -26,10 +48,15 @@ int main(){
     int key;
     cout<<"enter key to find from array"<<endl;
     cin>>key;
-    //searching
+    /*linearsearching
     for(int i=0;i<n;i++){
          if(arr[i]==key){
             cout<<"Key found at:"<<i<<" index";
          }
-    }
+    }*/
+   
+
+      cout<<binarysearch(key,arr,n);
+
+
 }
