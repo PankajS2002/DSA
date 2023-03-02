@@ -7,7 +7,7 @@ using namespace std;
 
 int main(){
 
-    int array[5]={10,20,30,40,50};
+    /*int array[5]={10,20,30,40,50};
 
     cout<<array[3]<<endl; //output:-40
 
@@ -26,6 +26,39 @@ int main(){
     for(int i=0;i<n;i++){
         cout<<arr[i]<<" ";
     }
+*/
+
+
+    //2d array
+      int n,m;
+      cout<<"enter number of rows"<<endl;
+      cin>>n;
+      cout<<endl;
+      cout<<"enter number of columns"<<endl;
+      cin>>m;
+      cout<<endl;
+      int arr[n][m];
+      cout<<"enter elements"<<endl;
+      for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>arr[i][j];
+        }
+      }
+
+
+      cout<<"2d array is"<<endl;
+       for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cout<<arr[i][j]<<" ";
+        }
+
+        cout<<endl;
+      }
+
+
+
+
+
 
 
 }
