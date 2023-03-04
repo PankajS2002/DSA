@@ -53,4 +53,40 @@ int peakElement(int arr[], int n)
          }
         }
         return count;
-}
+
+
+   //4)Sort an array of 0s, 1s and 2s. Given an array of size N containing only 0s, 1s, and 2s; sort the array in ascending order
+   
+   void sort012(int a[], int n)
+    {
+          int i = 0 ,  countzero = 0 , countone = 0 ,  counttwo = 0 ;  
+    while ( i < n )  
+    {  
+        if ( a [ i ] == 0 )  
+        {  
+            countzero = countzero + 1 ;  
+        }  
+        else if ( a [ i ] == 1 )  
+        {  
+            countone = countone + 1 ;  
+        }  
+        else  
+        {  
+            counttwo = counttwo + 2 ;  
+        }  
+        i = i + 1 ;  
+    }  
+    for  ( i = 0 ; i < countzero ; i++ )  
+    {  
+        a[ i ] = 0 ;  
+    }  
+    for ( i = countzero ; i < countzero + countone ; i++ )  
+    {  
+        a[ i ] = 1 ;  
+    }  
+    for ( i = countzero + countone ; i < n ; i++ )  
+    {  
+        a[ i ] = 2 ;  
+    }  
+    }     
+
