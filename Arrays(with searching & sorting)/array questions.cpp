@@ -90,3 +90,32 @@ int peakElement(int arr[], int n)
     }  
     }     
 
+//5) Subarray of given sum
+ vector<int> subarraySum(vector<int>arr, int n, long long s)
+    {
+        vector<int> v;
+        // Your code here
+        long long sum = arr[0]; int start = 0;
+        for(int i=1; i<=n; i++)
+        {
+            // sum = sum + arr[i];
+            // cout<<arr[0];
+            // // if(i<n)
+            // sum = sum + arr[i];
+            while(sum>s && start<i-1)
+            {
+                sum = sum - arr[start];
+                start++;
+            }
+            if(sum == s)
+            {
+                v.push_back(start+1);
+                v.push_back(i);
+                break; //imp
+            }
+            if(i<n)
+            sum = sum + arr[i];
+        }
+        if(v.size() == 0) v.push_back(-1);
+        return v;
+    }
