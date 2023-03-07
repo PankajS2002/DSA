@@ -119,3 +119,40 @@ int peakElement(int arr[], int n)
         if(v.size() == 0) v.push_back(-1);
         return v;
     }
+
+//6) Move all negative elements to end
+    void segregateElements(int arr[],int n)
+    {
+        int a[n];
+        int j=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]>=0){
+                a[j]=arr[i];
+                j++;
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(arr[i]<0){
+                a[j]=arr[i];
+                j++;
+            }
+        }
+        for(int i=0;i<n;i++){
+            arr[i]=a[i];
+        }
+    
+    }
+
+//7) Union of two arrays
+       int doUnion(int a[], int n, int b[], int m)  {
+       unordered_map<int, int> map;
+       for(int i=0;i<n;i++){
+           map[a[i]]++;
+       }
+       for(int i=0;i<m;i++){
+           map[b[i]]++;
+     
+       }
+       
+       return map.size();
+    }
