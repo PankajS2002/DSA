@@ -188,3 +188,24 @@ int countTriplet(int arr[], int n)
         }
         return count;
 	}
+
+//9)cyclically rotate an array by one 
+void rotate(int arr[], int n)
+{
+    for(int i=n-1;i>0;i--){
+        
+        swap(arr[i],arr[i-1]);
+
+    }
+}
+
+//10)Missing number in array
+int MissingNumber(int array[], int n) {
+    int sum=0;
+      for(int i=0;i<n-1;i++){
+          sum=sum+array[i];
+      }
+      int sum2=(n*(n+1))/2;
+     int ans=sum2-sum;
+     return ans;
+}
