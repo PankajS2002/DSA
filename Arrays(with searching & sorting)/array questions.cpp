@@ -209,3 +209,31 @@ int MissingNumber(int array[], int n) {
      int ans=sum2-sum;
      return ans;
 }
+
+//12)Minimize the Heights
+ int getMinDiff(int arr[], int n, int k) {
+        sort(arr,arr+n);
+        
+        int diff=arr[n-1]-arr[0];
+        int mini,maxi;
+        
+        for(int i=1;i<n;i++){
+            if(arr[i]-k<0){
+                continue;
+            }
+            
+            maxi=max(arr[i-1]+k,arr[n-1]-k);
+            mini=min(arr[0]+k,arr[i]-k);
+            
+            diff=min(diff,maxi-mini);
+        }
+        return diff;
+    }
+
+//13)Maximum Triplet product
+long long maxTripletProduct(long long arr[], int n)
+    {
+          sort(arr,arr+n);
+      
+        return max(arr[n-1]*arr[n-2]*arr[n-3],arr[0]*arr[1]*arr[n-1]);
+    }
