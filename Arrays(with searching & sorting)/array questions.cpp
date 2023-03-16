@@ -237,3 +237,56 @@ long long maxTripletProduct(long long arr[], int n)
       
         return max(arr[n-1]*arr[n-2]*arr[n-3],arr[0]*arr[1]*arr[n-1]);
     }
+
+//14)Find duplicate number in N+1 array
+int findDuplicate(vector<int>& nums) {
+
+        if (nums.empty()) {
+            return 0;
+        }
+        int slow = nums[0];
+        int fast = nums[0];
+        do {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }while (slow != fast);
+        
+        fast = nums[0];
+        while (fast != slow) {
+            fast = nums[fast];
+            slow = nums[slow];
+        }
+        return fast;
+
+    }
+
+//15)Minimum number of jumps
+int minJumps(int arr[], int n){
+        if (n <= 1)
+         return 0;
+ 
+        if (arr[0] == 0)
+            return -1;
+     
+        int maxReach = arr[0];
+        int step = arr[0];
+        int jump = 1;
+     
+        
+        for (int i = 1; i < n; i++) {
+            
+            if (i == n - 1)
+                return jump;
+    
+            maxReach = max(maxReach, i + arr[i]);
+            step--;
+            if (step == 0) {
+                jump++;
+                if (i >= maxReach)
+                    return -1;
+                step = maxReach - i;
+            }
+        }
+     
+        return -1;
+    }
