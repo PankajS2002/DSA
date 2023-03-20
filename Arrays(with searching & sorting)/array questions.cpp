@@ -290,3 +290,55 @@ int minJumps(int arr[], int n){
      
         return -1;
     }
+//16)Kadane's algorithm
+long long maxSubarraySum(int arr[], int n){
+        
+      int maxi=INT_MIN;
+      int curr=0;
+      
+      for(int i=0;i<n;i++){
+          curr=curr+arr[i];
+          curr=max(curr,arr[i]);
+          maxi=max(curr,maxi);
+      }
+      return maxi;
+    }
+};
+
+//17)Merge without extra space
+
+  int nextGap(int gap){
+             if (gap <= 1){
+              return 0;
+              }
+             return (gap / 2) + (gap % 2);
+           }
+           
+           
+        void merge(long long arr1[], long long arr2[], int n, int m) 
+        { 
+             int temp;
+             int gap =  ((n+m) / 2) + ((n+m) % 2); /*value of gap */
+             
+             while (gap > 0) {
+               int ptr1 = 0, ptr2 = gap;
+               while (ptr2 < (n+m)) {
+               /* comparing elements in first array - if arr1[ptr2]<arr1[ptr1] swap their values */
+               if (ptr2 < n && arr1[ptr1] > arr1[ptr2]) {
+                swap(arr1[ptr1] , arr1[ptr2]);
+               }
+              /* comparing elements in both arrays */
+              else if (ptr2 >= n && ptr1 < n && arr1[ptr1] > arr2[ptr2 - n]) {
+                swap(arr1[ptr1] , arr2[ptr2 -n]);
+               }
+              /* comparing elements in the second array */
+               else if (ptr2 >= n && ptr1 >= n && arr2[ptr1 - n] > arr2[ptr2 - n]) {
+                  swap(arr2[ptr1 - n] , arr2[ptr2 - n]);
+              }
+              ptr2++;
+              ptr1++;
+                   }
+             gap = nextGap(gap);
+            }
+        
+        } 
