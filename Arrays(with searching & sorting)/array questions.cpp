@@ -363,3 +363,230 @@ long long maxSubarraySum(int arr[], int n){
         mergedIntervals.push_back(tempInterval);
         return mergedIntervals; 
     }
+
+//19) subarray with 0 sum
+bool subArrayExists(int arr[], int n)
+    { 
+        unordered_map<int,int> m;
+        int sum=0;
+       
+        
+        for(int i=0;i<n;i++){
+            sum=sum+arr[i];
+            if(sum==0 || arr[i]==0 || m[sum]){
+                return 1;
+            }
+            else{
+                m[sum]=1;
+            }
+        }
+        return 0;
+        
+    }
+
+
+//20)count inversion
+long long int total_inversion(long long arr[],long long l,long long m,long long r)
+
+    {
+
+        long long n1=m-l+1,n2=r-m;
+
+        long long left[n1],right[n2];
+
+        
+
+        for(long long int i=0;i<n1;i++)
+
+        {
+
+            left[i]=arr[l+i];
+
+        }
+
+        
+
+        for(long long int j=0;j<n2;j++)
+
+        {
+
+            right[j]=arr[m+1+j];
+
+        }
+
+        
+
+        long long int i=0,j=0,k=l,res=0;
+
+        while(i<n1 and j<n2)
+
+        {
+
+            if(left[i]<=right[j])
+
+            {
+
+                arr[k]=left[i];
+
+                i++;
+
+            }
+
+            else
+
+            {
+
+                arr[k]=right[j];
+
+                j++;
+
+                res+=(n1-i);
+
+            }
+
+            k++;
+
+        }
+
+        
+
+        while(i<n1)
+
+        {
+
+            arr[k]=left[i];
+
+            i++,k++;
+
+        }
+
+        
+
+        while(j<n2)
+
+        {
+
+            arr[k]=right[j];
+
+            j++,k++;
+
+        }
+
+        
+
+        return res;
+
+    }
+
+    
+
+    long long int cnt_inversion(long long arr[],long long l,long long r)
+
+    {
+
+        long long int res=0;
+
+        if(r>l)
+
+        {
+
+            long long m=l+(r-l)/2;
+
+            res+=cnt_inversion(arr,l,m);
+
+            res+=cnt_inversion(arr,m+1,r);
+
+            
+
+            res+=total_inversion(arr,l,m,r);
+
+            
+
+        }
+
+        
+
+        return res;
+
+    }
+   
+    long long int inversionCount(long long arr[], long long N)
+    {   
+        return cnt_inversion(arr,0,N-1);
+       
+    }
+
+    //21)best time to buy and sell stock
+    int maxProfit(vector<int>& prices) {
+         if(prices.size()==0){
+            return 0;
+        }
+        
+        int profit=0;
+        int mini=prices[0];
+        int maxi=0;
+        
+        for(int i=0;i<prices.size();i++){
+            mini=min(mini,prices[i]);
+            profit=prices[i]-mini;
+            maxi=max(maxi,profit);
+        }
+        return maxi;
+    }
+    //22)count pairs with given sum
+    int getPairsCount(int arr[], int n, int k) {
+        unordered_map<int,int> m;
+        int ans=0;
+        
+        for(int i=0;i<n;i++){
+            int value=k-arr[i];
+            if(m[value]){
+                ans+=m[value];
+            }
+            m[arr[i]]++;
+        }
+        return ans;
+    }
+
+    //23)common elements in 3 sorted array
+     vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+        {
+            int i=0,k=0,j=0;
+            vector<int> ans;
+            
+            int prev1, prev2, prev3;
+            prev1 =prev2 =prev3 =INT_MIN;
+            while(i<n1 && j<n2 && k<n3){
+                while(A[i]==prev1 && i<n1)
+                 i++;
+                while(B[j]==prev2 && j<n2)
+                 j++;
+                while(C[k]==prev3 && k<n3)
+                 k++;
+            
+             if(A[i]==B[j] && B[j]==C[k]){
+                 ans.push_back(A[i]);
+                 prev1=A[i];
+                 prev2=B[j];
+                 prev3=C[k];
+                 i++;
+                 j++;
+                 k++;
+             }
+             else if(A[i]<B[j]){
+                 prev1=A[i];
+                 i++;
+             }
+             else if(B[j]<C[k]){
+                 prev2=B[j];
+                 j++;
+             }
+             else{
+                 prev3=C[k];
+                 k++;
+             }
+            }
+            return ans;
+            }
+
+            
