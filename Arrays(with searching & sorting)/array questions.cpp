@@ -590,3 +590,424 @@ long long int total_inversion(long long arr[],long long l,long long m,long long 
             }
 
             
+24)Rearrange positive and negative numbers
+            	void rearrange(int arr[], int n) {
+	    int newarr[n];
+	    int j=0;
+	    int k=0;
+	    int l=0;
+	    int m=0;
+	    for(int i=0;i<n;i++){
+	        if(arr[i]>=0){
+	            newarr[j]=arr[i];
+	            j++;
+	            k++;
+	            m++;
+	        }
+	    }
+	    
+	    for(int i=0;i<n;i++){
+	        if(arr[i]<0){
+	            newarr[j]=arr[i];
+	            j++;
+	        }
+	    }
+	    
+	    for(int i=0;i<n;i++){
+	       if(l<m && k<n){ 
+	        if(i%2==0){
+	            arr[i]=newarr[l];
+	            l++;
+	        }
+	        else{
+	            arr[i]=newarr[k];
+	            k++;
+	        }
+	       }
+	       else{
+	           while(l<m){
+	               arr[i]=newarr[l];
+	               l++;
+	           }
+	           while(k<n){
+	               arr[i]=newarr[k];
+	               k++;
+	           }
+	       }
+	    }
+	    
+	    
+	    
+	    
+	}
+
+25)subarray with 0 sum
+ bool subArrayExists(int arr[], int n)
+    { 
+        unordered_map<int,int> m;
+        int sum=0;
+       
+        
+        for(int i=0;i<n;i++){
+            sum=sum+arr[i];
+            if(sum==0 || arr[i]==0 || m[sum]){
+                return 1;
+            }
+            else{
+                m[sum]=1;
+            }
+        }
+        return 0;
+        
+    }
+
+    26)maximum product subarray
+    	long long maxProduct(vector<int> arr, int n) {
+	 long long int maxi=INT_MIN, prod=1;
+	 for(int i=0;i<n;i++){
+	     prod*=arr[i];
+	     maxi=max(maxi,prod);
+	     if(prod==0){
+	         prod=1;
+	     }
+	 }
+	 
+	 prod=1;
+	 for(int i=n-1;i>=0;i--){
+	     prod*=arr[i];
+	     maxi=max(maxi,prod);
+	     if(prod==0){
+	         prod=1;
+	     }
+	 }
+	 return maxi;
+	}
+
+    27)longest consequtive subsequence
+    int findLongestConseqSubseq(int arr[], int N)
+    {
+       unordered_set<int> s;
+        for(int i=0;i<N;i++){
+            s.insert(arr[i]);
+        }
+        
+        int ans=0;
+        for(int i=0;i<N;i++){
+            if(s.find(arr[i]-1)!=s.end()){
+                continue;
+            
+            }else{
+                int count=0;
+                int current=arr[i];
+                while(s.find(current)!=s.end()){
+                    count++;
+                    current++;
+                }
+                
+                ans=max(ans,count);
+            } 
+        }
+        return ans;
+    }
+
+    28)count more than n/k occurences
+     int countOccurence(int arr[], int n, int k) {
+          unordered_map<int, int> mp;
+      int count = 0;
+      for(int i = 0; i<n;i++){
+          mp[arr[i]]++;
+      }
+      
+      for(auto it: mp){
+          if(it.second > (n/k)){
+              count++;
+          }
+      }
+      return count;
+    }
+
+    29)buy and sell a share more than twice
+
+int maxProfit(vector<int>&price){
+    int n=price.size();
+   int profit[n];
+   
+	for (int i = 0; i < n; i++){
+		profit[i] = 0;
+	}
+
+	int max_price = price[n - 1];
+	
+	for (int i = n - 2; i >= 0; i--) {
+		if (price[i] > max_price){
+			max_price = price[i];
+		}
+
+		profit[i]
+			= max(profit[i + 1], max_price - price[i]);
+	}
+
+	int min_price = price[0];
+	
+	for (int i = 1; i < n; i++) {
+		if (price[i] < min_price){
+			min_price = price[i];
+		}
+
+		profit[i] = max(profit[i - 1],
+						profit[i] + (price[i] - min_price));
+	}
+	int result = profit[n - 1];
+
+	return result;
+   
+}
+
+30)array subset of another array
+
+string isSubset(int a1[], int a2[], int n, int m) {
+ 
+    unordered_map<int, int> map;
+    for(int i = 0; i < n; i++){
+        map[a1[i]]++;
+    }
+    
+    for(int j = 0; j < m; j++){
+        if(map[a2[j]] < 1 ){
+            return "No";
+        }
+        else{
+            map[a2[j]]--;
+        }
+        
+        
+    }
+    
+    return "Yes";
+    
+}
+31)find triplet that sum to given value
+bool find3Numbers(int A[], int n, int X)
+    {
+         sort(A,A+n);
+         for(int i=0;i<n-2;i++){
+             int next=i+1;
+             int end=n-1;
+             while(next<end){
+                 if(A[i]+A[next]+A[end]==X){
+                     return 1;
+                 }
+                 else if(A[i]+A[next]+A[end]>X){
+                     end--;
+                 }
+                 else{
+                     next++;
+                 }
+             }
+             
+         }
+         
+         return 0;
+    }
+
+32)trapping rain water
+ long long trappingWater(int arr[], int n){
+       int left[n];
+       int right[n];
+       int max1=arr[0];
+       int max2=arr[n-1];
+      
+      
+       for(int i=0;i<n;i++){
+           max1=max(max1,arr[i]);
+           left[i]=max1;
+       }
+       
+       
+       for(int j=n-1;j>=0;j--){
+           max2=max(max2,arr[j]);
+           right[j]=max2;
+       }
+       
+       
+       long long sum=0;
+       
+       for(int i=0;i<n;i++){
+           sum=sum+ (min(left[i],right[i]))
+       }
+    }
+
+    33)chocolate distribution problem
+    long long findMinDiff(vector<long long> a, long long n, long long m){
+      sort(a.begin(),a.end());
+      
+      long long mini=INT_MAX;
+      
+      for(int i=0;i<=(n-m);i++){
+          mini=min(mini, a[m-1+i]-a[i]);
+      }
+      return mini;
+      
+    
+    } 
+
+    34)smallest subarray with sum greater than x
+
+    int smallestSubWithSum(int arr[], int n, int x)
+    {
+       int start=0;
+       int end=0;
+       int min_len=INT_MAX;
+       int sum=0;
+       while(end<n){
+           
+           while(sum<=x && end<n){
+               sum+=arr[end++];
+                
+           }
+           
+           while(sum>x && start<n){
+               min_len=min(min_len,end-start);
+               sum-=arr[start];
+              start++;
+               
+           }
+           
+       }
+       
+       if(min_len==INT_MAX){
+           return 0;
+       }
+       return min_len;
+    }
+
+    35)three way partitioning
+     void threeWayPartition(vector<int>& array,int a, int b)
+    {
+         int n=array.size();
+         int low = 0;
+         int high = n-1;
+         int i = 0;
+        
+        while(i <= high){
+            if(array[i] < a){
+                swap(array[i],array[low]);
+                low++;
+                i++;
+            }
+            else if(array[i] > b){
+                swap(array[i] , array[high]);
+                high--;
+            }
+            else i++;
+        }
+
+        
+    }
+
+    36)minimum swaps and k together
+    int minSwap(int arr[], int n, int k) {
+       
+
+   
+    int count = 0;
+    for (int i = 0; i < n; ++i)
+        if (arr[i] <= k)
+            ++count;
+     
+    int bad = 0;
+    for (int i = 0; i < count; ++i)
+        if (arr[i] > k)
+            ++bad;
+     
+    int ans = bad;
+    for (int i = 0, j = count; j < n; ++i, ++j) {
+         
+        if (arr[i] > k)
+            --bad;
+         
+        if (arr[j] > k)
+            ++bad;
+         
+        ans = min(ans, bad);
+    }
+    return ans;
+
+       
+    }
+
+    37)palindromic array
+
+	bool isPalindrome(int num) {
+    int temp = num, rev = 0;
+    while (temp > 0) {
+        rev = (rev * 10) + (temp % 10);
+        temp /= 10;
+    }
+    return (num == rev);
+}
+    int PalinArray(int a[], int n)
+    {
+    
+
+
+    for (int i = 0; i < n; i++) {
+        if (!isPalindrome(a[i])) {
+            return 0;
+        }
+    }
+    return 1;
+
+    }
+
+38)find median
+    int find_median(vector<int> v)
+		{
+		   if(v.size()%2==1){
+		       sort(v.begin(),v.end());
+		       int mid=(v.size()-1)/2;
+		       return v[mid];
+		   }
+		   else{
+		       int mid=ceil((v.size())/2);
+		       return (v[mid]+v[mid-1])/2;
+		   }
+		}
+
+
+39)Median of 2 sorted arrays of different size
+double MedianOfArrays(vector<int>& array1, vector<int>& array2)
+    {
+         int n = array1.size(), m = array2.size();
+    int i = 0, j = 0, count;
+    double m1 = -1, m2 = -1;
+
+    // Check for empty vectors
+    if ((n + m) % 2 == 1) {
+        for (count = 0; count <= (n + m) / 2; count++) {
+            if (i != n && j != m) {
+                m1 = (array1[i] > array2[j]) ? array2[j++] : array1[i++];
+            } else if (i < n) {
+                m1 = array1[i++];
+            } else {
+                m1 = array2[j++];
+            }
+        }
+        return m1;
+    } else {
+        for (count = 0; count <= (n + m) / 2; count++) {
+            m2 = m1;
+            if (i != n && j != m) {
+                m1 = (array1[i] > array2[j]) ? array2[j++] : array1[i++];
+            } else if (i < n) {
+                m1 = array1[i++];
+            } else {
+                m1 = array2[j++];
+            }
+        }
+        return (m1 + m2) / 2;
+    }
+        
+        
+    
+    }

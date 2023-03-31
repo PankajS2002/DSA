@@ -1,9 +1,9 @@
-// It is collection of variables of similar data type
-//An array is a contiguous memory location which holds data.
-//Indexing starts from 0 in most of the programming languages
+
 
 #include<iostream>
 using namespace std;
+
+
 
 int main(){
 
@@ -54,6 +54,10 @@ int main(){
 
         cout<<endl;
       }
+ 
+
+
+
 
 
 
