@@ -1011,3 +1011,42 @@ double MedianOfArrays(vector<int>& array1, vector<int>& array2)
         
     
     }
+
+
+    //40)search in a matrix
+    int matSearch (vector <vector <int>> &mat, int N, int M, int X)
+	{
+	    int i=0;
+	    int j=M-1;
+	    
+	    while(i<N && j>=0){
+	        if(X==mat[i][j]){
+	            return 1;
+	        }
+	        if(X<mat[i][j]){
+	            j--;
+	        }
+	        else{
+	            i++;
+	        }
+	    }
+	    return 0;
+	}
+
+    //41)median in a row wise sorted matrix
+     int median(vector<vector<int>> &matrix, int R, int C){
+       vector<int>v;
+        for(int i=0;i<R;i++){
+            for(int j=0;j<C;j++){
+                
+            v.push_back(matrix[i][j]);
+            }
+        }
+           
+      sort(v.begin(),v.end());
+    
+       
+       return v[(v.size()-1)/2];   
+     }
+
+     //42)
