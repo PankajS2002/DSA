@@ -145,3 +145,73 @@ bool isInterleave(string A, string B, string C)
     }
     return res;
 	}
+
+    //7)longest repeating subsequence
+    	int LongestRepeatingSubsequence(string str){
+		   int n = str.length();
+
+	int t[n+1][n+1];
+
+	for(int i=0;i<=n;i++){
+		for(int j=0;j<=n;j++){
+		
+		if(i==0 or j==0)
+		t[i][j]=0;
+	}
+		
+	}
+	for (int i=1; i<=n; i++)
+	{
+		for (int j=1; j<=n; j++)
+		{
+			
+			if (str[i-1] == str[j-1] && i != j)
+			t[i][j] = 1 + t[i-1][j-1];		
+		
+			else
+				t[i][j] = max(t[i][j-1], t[i-1][j]);
+		}
+	}
+	return t[n][n];
+		}
+
+        //8)longest palindrom string
+         string longestPalin (string S) {
+        string result="";
+        int start=0;
+        int high;
+        int low=0;
+        int maxlen=1;
+        int n=S.size();
+        for(int i=1;i<n;i++){
+            low=i-1;
+            high=i;
+            while(low>=0 && high<n && S[low]==S[high]){
+                if(high-low+1>maxlen){
+                    start=low;
+                    maxlen=high-low+1;
+                }
+              low--;
+              high++;
+            }
+            
+            low=i-1;
+            high=i+1;
+            
+            while(low>=0 && high<n && S[low]==S[high]){
+                if(high-low+1>maxlen){
+                    start=low;
+                    maxlen=high-low+1;
+                }
+              low--;
+              high++;
+            }
+           
+            
+        }
+        
+        for(int i=start;i<maxlen+start;i++){
+            result=result+S[i];
+        }
+        return result;
+    }
