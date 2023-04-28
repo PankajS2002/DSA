@@ -298,3 +298,56 @@ bool isInterleave(string A, string B, string C)
         }
         return res;
     }
+
+//12)print all subsequences of given string
+
+	   void solve(string S,vector<string>& ans,int index){
+	       if(index>=S.size()){
+	           ans.push_back(S);
+	           return;
+	       }
+	       
+	       for(int j=index;j<S.size();j++){
+	           swap(S[index],S[j]);
+	           solve(S,ans,index+1);
+	           swap(S[index],S[j]);
+	       }
+	       
+	   }
+		vector<string> find_permutation(string S)
+		{
+		    vector<string> ans;
+		   
+		    
+		    solve(S,ans,0);
+		      sort(ans.begin(),ans.end());
+		    ans.erase(unique(ans.begin(),ans.end()),ans.end());
+		    return ans;
+		}
+
+        //13)split binary string into substrings with equal number of 0s and 1s
+        int maxSubStr(string str){
+                  int n=str.size();
+   
+               int count0 = 0, count1 = 0;
+            
+               int cnt = 0;
+               for (int i = 0; i < n; i++) {
+                   if (str[i] == '0') {
+                       count0++;
+                   }
+                   else {
+                       count1++;
+                   }
+                   if (count0 == count1) {
+                       cnt++;
+                   }
+               }
+               if (count0!=count1) {
+                   return -1;
+               }
+            
+               return cnt;
+               }
+
+        //14)
