@@ -350,4 +350,142 @@ bool isInterleave(string A, string B, string C)
                return cnt;
                }
 
-        //14)
+        //14)word wrap problem
+            int solve(int idx, vector<int> arr, int k, vector<int> &t) {
+        if(t[idx]!=-1) return t[idx];
+        int minRes = INT_MAX;
+        int sum = 0;
+        for(int i=idx; i<arr.size(); i++) {
+            sum += arr[i];
+            if(k-sum>=0 && i==arr.size()-1) return 0;
+            if(k-sum>=0) {
+                minRes = min(minRes, (k-sum)*(k-sum) + solve(i+1, arr, k, t));
+            }
+            sum++;
+        }
+        return t[idx] = minRes;
+    }
+    int solveWordWrap(vector<int>nums, int k) 
+    {
+        vector<int> t(nums.size(), -1);
+        return solve(0, nums, k, t);
+    }
+
+    //15)edit distance
+
+    int editDistance(string s, string t) {
+       
+       int n=s.length();
+       int m=t.length();
+       
+       int dp[n+1][m+1];
+       
+       for(int i=0;i<=n;i++){
+         dp[i][0]=i;
+       }
+       for(int j=0;j<=m;j++){
+           dp[0][j]=j;
+       }
+       
+       for(int i=1;i<=n;i++){
+           for(int j=1;j<=m;j++){
+               if(s[i-1]==t[j-1]){
+                   dp[i][j]=dp[i-1][j-1];
+               }
+               else{
+                   dp[i][j]=1+min(min(dp[i-1][j],dp[i][j-1]),dp[i-1][j-1]);
+               }
+           }
+       }
+       
+       return dp[n][m];
+       
+    }
+
+    //16)find next greater number with same set of digits
+      int findNext (int N) 
+    {
+             int leftidx=-1;
+        
+      string s=to_string(N);
+
+//finding adjascent smaller right to left
+      for(int i=s.length()-1; i>=1; i--){
+          if(s[i] > s[i-1] ){
+               leftidx=i-1;//leftidx=2
+             
+              
+              break;
+          }
+      }
+      //adjascent smaller right to left if not find reutrn -1;
+      if(leftidx == -1){
+          return -1;
+      }
+      //finding minimum in range of leftidx to s.length()-1
+      int mini=INT_MAX;
+     int miniidx=leftidx+1;
+     for(int i=leftidx+1; i<s.length(); i++){
+        if (s[i] > s[leftidx] && s[i] < mini){
+             mini=s[i];
+              miniidx=i;   //5;
+         }
+     }
+     
+      swap(s[leftidx],s[miniidx]);//536974
+      
+      sort(s.begin()+leftidx+1,s.end());//536479
+      
+      int res=stoi(s);//converting string into integer
+      if(res <=N){
+          return -1;
+      }
+     return res;
+      
+    } 
+
+    //17)parenthesis checker
+     bool ispar(string x)
+    {
+        stack<char> s;
+        for(int i=0;i<x.size();i++){
+            if(x[i]=='[' || x[i]=='(' || x[i]=='{' ){
+                s.push(x[i]);
+            }
+            else{
+                if(s.empty()){
+                    return false;
+                }
+                if(x[i]==')' && s.top()!='('){
+                    return false;
+                }
+                if(x[i]==']' && s.top()!='['){
+                    return false;
+                }
+                if(x[i]=='}' && s.top()!='{'){
+                    return false;
+                }
+             s.pop();    
+            }
+            
+        }
+
+      return s.empty();
+
+    }
+
+    //18)word break
+    int wordBreak(string A, vector<string> &B) {
+        int n = A.size();
+        vector<bool> dp(n + 1, 0);
+        dp[n] = true;
+        
+        for(int i = n - 1; i >= 0; i--) {
+            for(auto word: B) {
+                if(i + word.size() <= n and A.substr(i, word.size()) == word and dp[i + word.size()])
+                    dp[i] = true;
+            }
+        }
+        
+        return dp[0];
+    }  
