@@ -962,3 +962,65 @@ string secFrequent (string arr[], int n)
     }
 
 
+//33)print anagrams together
+vector<vector<string> > Anagrams(vector<string>& string_list) {
+        
+        //code here
+        vector<vector<string>> ans;
+        unordered_map<string,vector<string>> mp;
+        
+        for(auto it:string_list){
+            string temp=it;
+            sort(it.begin(),it.end());
+            mp[it].push_back(temp);
+        }
+        
+        for(auto it:mp){
+            ans.push_back(it.second);
+        }
+        
+        return ans;
+        
+    }
+
+
+//34)rearrange characters in a string such that no two adjacent are same
+
+
+ string rearrangeString(string s)
+    {   int n = s.size();
+        map<char, int> mp;
+        for(int i=0; i<n; i++) mp[s[i]]++;
+
+        priority_queue<pair<int, char>>q;
+        for(auto i:mp) q.push({i.second, i.first});
+
+        string st = "";
+        while(!q.empty())
+        {
+            auto t = q.top();
+            q.pop();
+
+            st += t.second;
+            t.first--;            
+
+            if(!q.empty())
+            { 
+                auto tt = q.top();
+                q.pop();
+
+                st += tt.second;
+                tt.first--;
+
+                if(tt.first) q.push({tt.first, tt.second});
+            }
+            
+            if(t.first) q.push({t.first, t.second});
+
+        }
+
+        for(int i=0; i<st.size()-1; i++)if(st[i] == st[i+1]) return "-1";
+
+        return st;
+    }
+    
